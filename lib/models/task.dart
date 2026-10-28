@@ -11,7 +11,6 @@ class Task {
     this.terminee = false,
   });
 
-  /// Crée une copie modifiée de la tâche avec de nouvelles valeurs optionnelles
   Task copyWith({
     String? titre,
     DateTime? echeance,
@@ -26,7 +25,6 @@ class Task {
     );
   }
 
-  /// Désérialisation depuis un objet JSON (Map)
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(
       titre: json['titre'] as String,
@@ -36,7 +34,6 @@ class Task {
     );
   }
 
-  /// Sérialisation en objet Map JSON
   Map<String, dynamic> toJson() {
     return {
       'titre': titre,
@@ -47,9 +44,8 @@ class Task {
   }
 
   @override
-  String toString() {
-    return 'Task(titre: $titre, echeance: $echeance, terminee: $terminee, description: $description)';
-  }
+  String toString() =>
+      'Task(titre: $titre, echeance: $echeance, terminee: $terminee)';
 
   @override
   bool operator ==(Object other) {
@@ -68,4 +64,3 @@ class Task {
       description.hashCode ^
       terminee.hashCode;
 }
-

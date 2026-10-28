@@ -9,7 +9,6 @@ class Course {
     this.enseignant,
   });
 
-  /// Crée une copie modifiée du cours
   Course copyWith({
     String? code,
     String? titre,
@@ -22,7 +21,6 @@ class Course {
     );
   }
 
-  /// Désérialisation depuis un objet JSON (Map)
   factory Course.fromJson(Map<String, dynamic> json) {
     return Course(
       code: json['code'] as String,
@@ -31,7 +29,6 @@ class Course {
     );
   }
 
-  /// Sérialisation en objet Map JSON
   Map<String, dynamic> toJson() {
     return {
       'code': code,
@@ -41,9 +38,7 @@ class Course {
   }
 
   @override
-  String toString() {
-    return 'Course(code: $code, titre: $titre, enseignant: $enseignant)';
-  }
+  String toString() => 'Course(code: $code, titre: $titre)';
 
   @override
   bool operator ==(Object other) {
@@ -57,4 +52,3 @@ class Course {
   @override
   int get hashCode => code.hashCode ^ titre.hashCode ^ enseignant.hashCode;
 }
-

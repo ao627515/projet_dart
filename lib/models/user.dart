@@ -9,7 +9,6 @@ class User {
     this.filiere,
   });
 
-  /// Crée une copie modifiée de l'utilisateur
   User copyWith({
     String? nom,
     String? email,
@@ -22,7 +21,6 @@ class User {
     );
   }
 
-  /// Désérialisation depuis un objet JSON (Map)
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       nom: json['nom'] as String,
@@ -31,7 +29,6 @@ class User {
     );
   }
 
-  /// Sérialisation en objet Map JSON
   Map<String, dynamic> toJson() {
     return {
       'nom': nom,
@@ -41,9 +38,7 @@ class User {
   }
 
   @override
-  String toString() {
-    return 'User(nom: $nom, email: $email, filiere: $filiere)';
-  }
+  String toString() => 'User(nom: $nom, email: $email)';
 
   @override
   bool operator ==(Object other) {
@@ -57,4 +52,3 @@ class User {
   @override
   int get hashCode => nom.hashCode ^ email.hashCode ^ filiere.hashCode;
 }
-

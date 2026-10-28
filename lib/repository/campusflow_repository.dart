@@ -2,14 +2,12 @@ import '../models/course.dart';
 import '../models/task.dart';
 import '../models/user.dart';
 
-/// Interface du dépôt pour les données de CampusFlow
 abstract class TaskRepository {
   Future<List<Task>> fetchTasks({bool shouldFail = false});
   Future<List<Course>> fetchCourses({bool shouldFail = false});
   Future<User> fetchCurrentUser({bool shouldFail = false});
 }
 
-/// Dépôt simulé implémentant le chargement asynchrone avec Future.delayed
 class MockTaskRepository implements TaskRepository {
   final Duration delay;
 
@@ -17,15 +15,13 @@ class MockTaskRepository implements TaskRepository {
 
   @override
   Future<List<Task>> fetchTasks({bool shouldFail = false}) async {
-    // Simulation du temps d'attente réseau
     await Future.delayed(delay);
 
     if (shouldFail) {
-      throw Exception('Erreur réseau : impossible de charger les tâches.');
+      throw Exception('Erreur de chargement des tâches');
     }
 
-    // Données brutes simulées (JSON)
-    final mockJsonTasks = [
+    final data = [
       {
         'titre': 'Rendu TP Dart',
         'echeance': '2026-10-29T23:59:00.000Z',
@@ -35,19 +31,18 @@ class MockTaskRepository implements TaskRepository {
       {
         'titre': 'Projet Flutter',
         'echeance': '2026-11-06T17:00:00.000Z',
-        'description': 'Interface et navigation de CampusFlow',
+        'description': 'Interface et navigation',
         'terminee': false,
       },
       {
         'titre': 'Examen UX',
         'echeance': '2026-11-09T08:00:00.000Z',
-        'description': 'Évaluation sur les wireframes et l’accessibilité',
+        'description': 'Wireframes et accessibilité',
         'terminee': true,
       },
     ];
 
-    // Conversion JSON -> Modèle avec fromJson
-    return mockJsonTasks.map((json) => Task.fromJson(json)).toList();
+    return data.map(Task.fromJson).toList();
   }
 
   @override
@@ -55,10 +50,10 @@ class MockTaskRepository implements TaskRepository {
     await Future.delayed(delay);
 
     if (shouldFail) {
-      throw Exception('Erreur réseau : impossible de charger les cours.');
+      throw Exception('Erreur de chargement des cours');
     }
 
-    final mockJsonCourses = [
+    final data = [
       {
         'code': 'MOB',
         'titre': 'Programmation Mobile',
@@ -67,11 +62,11 @@ class MockTaskRepository implements TaskRepository {
       {
         'code': 'UXUI',
         'titre': 'Design UX & Wireframes',
-        'enseignant': 'Université Aube Nouvelle',
+        'enseignant': 'Aube Nouvelle',
       },
     ];
 
-    return mockJsonCourses.map((json) => Course.fromJson(json)).toList();
+    return data.map(Course.fromJson).toList();
   }
 
   @override
@@ -79,16 +74,15 @@ class MockTaskRepository implements TaskRepository {
     await Future.delayed(delay);
 
     if (shouldFail) {
-      throw Exception('Erreur réseau : impossible de charger le profil.');
+      throw Exception('Erreur de chargement de l\'utilisateur');
     }
 
-    final mockJsonUser = {
+    final data = {
       'nom': 'Amina',
       'email': 'amina@campusflow.bf',
       'filiere': 'Master 1 Informatique',
     };
 
-    return User.fromJson(mockJsonUser);
+    return User.fromJson(data);
   }
 }
-
