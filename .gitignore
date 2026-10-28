@@ -1,0 +1,12 @@
+# Files and directories created by the Dart SDK and pub
+.dart_tool/
+.packages
+build/
+.pub-cache/
+.pub/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
